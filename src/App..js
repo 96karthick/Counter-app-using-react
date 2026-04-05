@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Counter from "./Counter";
+import RandomNumberGenerator from "./RandomNumberGenerator";
 
-function Counter() {
-  const [count, setCount] = useState(0);
-
+function App() {
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Counter App</h1>
-      <h2>{count}</h2>
+    <Router>
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <h1>My React Apps</h1>
 
-      {count === 0 && <p style={{ color: "red" }}>Count is zero</p>}
+        <div>
+          <Link to="/counter">Counter</Link> |{" "}
+          <Link to="/random">Random Generator</Link>
+        </div>
 
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <button onClick={() => count > 0 && setCount(count - 1)}>
-        Decrement
-      </button>
-    </div>
+        <Routes>
+          <Route path="/counter" element={<Counter />} />
+          <Route path="/random" element={<RandomNumberGenerator />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
-export default Counter;
+export default App;
